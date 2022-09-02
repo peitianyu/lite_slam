@@ -111,7 +111,7 @@ Eigen::Vector3f ScanContext::AlignScanContext(const Eigen::MatrixXf &curr_scan_c
         }
     }
 
-
+    sum = std::numeric_limits<float>::max();
     int d_ring = 0;
     for(int i = 0; i < m_params.num_ring; i++)
     {
@@ -133,7 +133,7 @@ Eigen::Vector3f ScanContext::AlignScanContext(const Eigen::MatrixXf &curr_scan_c
 
     
     float angle = static_cast<float>((d_sector + 0.5) * 360 / m_params.num_sector) / 180.0f * M_PI;
-    float min_dist = static_cast<float>(d_ring + 0.5) * m_params.max_range / m_params.num_ring;
+    float min_dist = static_cast<float>(m_params.num_ring - d_ring + 0.5) * m_params.max_range / m_params.num_ring;
     if(angle > M_PI) angle -= 2 * M_PI;
     
     return Eigen::Vector3f(min_dist * cos(angle), min_dist * sin(angle), angle);
