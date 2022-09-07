@@ -19,6 +19,7 @@ https://github.com/peitianyu/bag2txt
 
 # 待完成
 ```
+- 借鉴loam思想实现实时定位
 - scantomap工程优化
 - 加入submap模块,并重新设计工程
 - 加入mcl进行重定位
