@@ -32,9 +32,9 @@ https://github.com/peitianyu/bag2txt
         - 简单版: 直接差分里程
         - 复杂版: 通过ndt得到粗pose,用于输出前端里程
     - scantomap工程优化
-    - 加入mcl进行重定位
-    - 概率地图data将MatrixXf格式改为一维数组
     - 使用scan_context回环检测用于位姿图优化更新位姿与概率图
+- 概率地图data将MatrixXf格式改为一维数组,使之更为通用
+- 加入mcl进行重定位
 - 加入submap模块,并重新设计工程
 - 加入反光板(作为land_mark)
 - 加入imu预处理
