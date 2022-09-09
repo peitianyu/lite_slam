@@ -29,8 +29,6 @@ https://github.com/peitianyu/bag2txt
 ```
 - 逻辑优化
     - 借鉴loam思想实现实时定位
-        - 简单版: 直接差分里程
-        - 复杂版: 通过ndt得到粗pose,用于输出前端里程
     - scantomap工程优化
     - 使用scan_context回环检测用于位姿图优化更新位姿与概率图
 - 概率地图data将MatrixXf格式改为一维数组,使之更为通用
