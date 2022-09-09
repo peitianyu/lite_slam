@@ -157,7 +157,7 @@ private:
 		for (int m = 0; m < m_options.particle_size; m ++) {
 			float u = random + (float)m / (float)m_options.particle_size;
  		
-			while (u > c && index < m_options.particle_size - 1){ 
+			while (u > c & index < m_options.particle_size - 1){ 
 				index++;				
 				c += particles_temp[index].weight;	
 			}

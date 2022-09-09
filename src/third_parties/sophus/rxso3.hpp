@@ -384,7 +384,7 @@ class RxSO3Base {
   // Precondition: ``i`` must be 0, 1, 2 or 3.
   //
   SOPHUS_FUNC static Transformation generator(int i) {
-    SOPHUS_ENSURE(i >= 0 && i <= 3, "i should be in range [0,3].");
+    SOPHUS_ENSURE(i >= 0 & i <= 3, "i should be in range [0,3].");
     Tangent e;
     e.setZero();
     e[i] = Scalar(1);

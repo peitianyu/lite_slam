@@ -6,9 +6,9 @@
 class GridMapBase
 {
 public:
-	struct Params
-	{
-		float resolution = 0.05; // meter / pixel
+    struct Params
+    {
+        float resolution = 0.05; // meter / pixel
         Eigen::Vector2i size = Eigen::Vector2i(2000, 2000); // (rows, cols)
         Eigen::Vector2f origin = Eigen::Vector2f(-60.0f, -60.0f); // left-bottom corner of the map
         float log_odds_p_occ = 0.6f;

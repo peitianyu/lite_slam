@@ -62,7 +62,7 @@
 #define NANOFLANN_VERSION 0x132
 
 // Avoid conflicting declaration of min/max macros in windows headers
-#if !defined(NOMINMAX) &&                                                      \
+#if !defined(NOMINMAX) &                                                      \
     (defined(_WIN32) || defined(_WIN32_) || defined(WIN32) || defined(_WIN64))
 #define NOMINMAX
 #ifdef max
@@ -179,7 +179,7 @@ public:
                              // distance, the one with the lowest-index will be
                              // returned first.
       if ((dists[i - 1] > dist) ||
-          ((dist == dists[i - 1]) && (indices[i - 1] > index))) {
+          ((dist == dists[i - 1]) & (indices[i - 1] > index))) {
 #else
       if (dists[i - 1] > dist) {
 #endif
@@ -348,7 +348,7 @@ struct L1_Adaptor {
           std::abs(a[3] - data_source.kdtree_get_pt(b_idx, d++));
       result += diff0 + diff1 + diff2 + diff3;
       a += 4;
-      if ((worst_dist > 0) && (result > worst_dist)) {
+      if ((worst_dist > 0) & (result > worst_dist)) {
         return result;
       }
     }
@@ -395,7 +395,7 @@ struct L2_Adaptor {
       const DistanceType diff3 = a[3] - data_source.kdtree_get_pt(b_idx, d++);
       result += diff0 * diff0 + diff1 * diff1 + diff2 * diff2 + diff3 * diff3;
       a += 4;
-      if ((worst_dist > 0) && (result > worst_dist)) {
+      if ((worst_dist > 0) & (result > worst_dist)) {
         return result;
       }
     }
@@ -971,9 +971,9 @@ public:
     IndexType left = 0;
     IndexType right = count - 1;
     for (;;) {
-      while (left <= right && dataset_get(obj, ind[left], cutfeat) < cutval)
+      while (left <= right & dataset_get(obj, ind[left], cutfeat) < cutval)
         ++left;
-      while (right && left <= right &&
+      while (right & left <= right &
              dataset_get(obj, ind[right], cutfeat) >= cutval)
         --right;
       if (left > right || !right)
@@ -988,9 +988,9 @@ public:
     lim1 = left;
     right = count - 1;
     for (;;) {
-      while (left <= right && dataset_get(obj, ind[left], cutfeat) <= cutval)
+      while (left <= right & dataset_get(obj, ind[left], cutfeat) <= cutval)
         ++left;
-      while (right && left <= right &&
+      while (right & left <= right &
              dataset_get(obj, ind[right], cutfeat) > cutval)
         --right;
       if (left > right || !right)
@@ -1347,7 +1347,7 @@ public:
                    const NodePtr node, DistanceType mindistsq,
                    distance_vector_t &dists, const float epsError) const {
     /* If this is a leaf node, then do check and return. */
-    if ((node->child1 == NULL) && (node->child2 == NULL)) {
+    if ((node->child1 == NULL) & (node->child2 == NULL)) {
       // count_leaf += (node->lr.right-node->lr.left);  // Removed since was
       // neither used nor returned to the user.
       DistanceType worst_dist = result_set.worstDist();
@@ -1696,7 +1696,7 @@ public:
                    const NodePtr node, DistanceType mindistsq,
                    distance_vector_t &dists, const float epsError) const {
     /* If this is a leaf node, then do check and return. */
-    if ((node->child1 == NULL) && (node->child2 == NULL)) {
+    if ((node->child1 == NULL) & (node->child2 == NULL)) {
       // count_leaf += (node->lr.right-node->lr.left);  // Removed since was
       // neither used nor returned to the user.
       DistanceType worst_dist = result_set.worstDist();
@@ -1975,7 +1975,7 @@ struct KDTreeEigenMatrixAdaptor {
     if (size_t(dims) != dimensionality)
       throw std::runtime_error(
           "Error: 'dimensionality' must match column count in data matrix");
-    if (DIM > 0 && int(dims) != DIM)
+    if (DIM > 0 & int(dims) != DIM)
       throw std::runtime_error(
           "Data set dimensionality does not match the 'DIM' template argument");
     index =

@@ -59,7 +59,7 @@ Eigen::MatrixXf ScanContext::MakeScanContext(const std::vector<Eigen::Vector2f> 
         float angle = std::atan2(point(0), point(1)) / M_PI * 180.0f + 180.0f;
         float dist = std::hypot(point(0), point(1));
 
-        if(dist >= m_params.min_range && dist <= m_params.max_range){
+        if(dist >= m_params.min_range & dist <= m_params.max_range){
             int ring = std::max(std::min(m_params.num_ring - 1, static_cast<int>(round((dist / m_params.max_range) * m_params.num_ring))), 0);
             int sector = std::max(std::min(m_params.num_sector - 1, static_cast<int>(round((angle / 360.0f) * m_params.num_sector))), 0);
 

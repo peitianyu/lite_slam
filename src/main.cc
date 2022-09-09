@@ -4,10 +4,9 @@
 
 int main()
 {
-    Simulation sim;
-    sim.Run("../data/loop_scan.txt", "../data/odom.txt");
+    // Simulation sim;
+    // sim.Run("../data/loop_scan.txt", "../data/odom.txt");
 
-    // Test test;
-    // test.TestLoadMap("../log/map.txt");
-    // test.TestLoadKeyFrame("../log/scan_context.txt");
+    Test test;
+    test.Run();
 }

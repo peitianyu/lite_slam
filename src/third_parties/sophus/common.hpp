@@ -53,7 +53,7 @@ class IsStreamable {
 template <class T>
 class ArgToStream {
  public:
-  static void impl(std::stringstream& stream, T&& arg) {
+  static void impl(std::stringstream& stream, T& arg) {
     stream << std::forward<T>(arg);
   }
 };
@@ -65,13 +65,13 @@ inline void FormatStream(std::stringstream& stream, char const* text) {
 
 // Following: http://en.cppreference.com/w/cpp/language/parameter_pack
 template <class T, typename... Args>
-void FormatStream(std::stringstream& stream, char const* text, T&& arg,
-                  Args&&... args) {
+void FormatStream(std::stringstream& stream, char const* text, T& arg,
+                  Args&... args) {
   static_assert(IsStreamable<T>::value,
                 "One of the args has no ostream overload!");
   for (; *text != '\0'; ++text) {
     if (*text == '%') {
-      ArgToStream<T&&>::impl(stream, std::forward<T>(arg));
+      ArgToStream<T&>::impl(stream, std::forward<T>(arg));
       FormatStream(stream, text + 1, std::forward<Args>(args)...);
       return;
     }
@@ -83,7 +83,7 @@ void FormatStream(std::stringstream& stream, char const* text, T&& arg,
 }
 
 template <class... Args>
-std::string FormatString(char const* text, Args&&... args) {
+std::string FormatString(char const* text, Args&... args) {
   std::stringstream stream;
   FormatStream(stream, text, std::forward<Args>(args)...);
   return stream.str();
@@ -114,7 +114,7 @@ void ensureFailed(char const* function, char const* file, int line,
 namespace Sophus {
 template <class... Args>
 SOPHUS_FUNC void defaultEnsure(char const* function, char const* file, int line,
-                               char const* description, Args&&... args) {
+                               char const* description, Args&... args) {
   std::printf("Sophus ensure failed in function '%s', file '%s', line %d.\n",
               function, file, line);
 #ifdef __CUDACC__

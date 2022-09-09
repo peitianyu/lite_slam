@@ -9,9 +9,9 @@
 
 struct GridSubMap
 {
-    uint pose;
+    Eigen::Vector3f pose;
     std::shared_ptr<GridMapBase> grid_map;
-    std::vector<std::shared_ptr<ScanContext::KeyFrame>> m_key_frames;
+    std::vector<std::shared_ptr<ScanContext::KeyFrame>> key_frames;
 };
 
 
@@ -20,14 +20,16 @@ class GridSubMaps
 public:
     struct Options
     {
-        uint map_num = 10;
         uint max_dist = 20.0;
     };
 public:
     GridSubMaps(const Options& options)
     :m_options(options)
+    {}
+
+    void AddSubMap(const uint& id, std::shared_ptr<GridSubMaps> grid_map)
     {
-        m_submaps.resize(options.map_num);
+        m_submaps[id] = grid_map;
     }
 
 private:

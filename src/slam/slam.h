@@ -63,7 +63,9 @@ private:
 
 	void RelocationInit();
 
-	void Relocation();
+	void LoopClosure();
+
+	void PoseGraphOptimize();
 
 	void Location();
 

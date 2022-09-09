@@ -77,8 +77,8 @@ void Slam::SlamMode(const Pose2d& prior_pose)
 			Location();
 		case Status::UPDATE:
 			Update();
-			break;
 		case Status::LOOPCLOSURE:
+			LoopClosure();
 			break;
 	}
 }
@@ -91,7 +91,7 @@ void Slam::LocationMode()
 			RelocationInit();
 			break;
 		case Status::RELOCATION:
-			Relocation();
+			LoopClosure();
 			break;
 		case Status::LOCATION:
 			Location();
@@ -148,21 +148,20 @@ void Slam::RelocationInit()
 	m_status = Status::RELOCATION;
 }
 
-void Slam::Relocation()
+void Slam::LoopClosure()
 {
 	int loop_id = m_scan_context->DetectLoopClosure(m_scan->GetScanPoints(), m_estimate_pose);
 	if(loop_id != -1){
-		std::cout<<"loop_id: "<<loop_id<<std::endl;
-		std::cout<<"m_estimate_pose0: "<<m_estimate_pose.transpose()<<std::endl;
 		m_estimate_pose = m_scan_matcher->ScanMatch(m_scan->Voxelfilter(m_scan->GetScanPoints(), 0.4), m_estimate_pose, 2, 20); 
-		std::cout<<"m_estimate_pose1: "<<m_estimate_pose.transpose()<<std::endl;
 		m_estimate_pose = m_scan_matcher->ScanMatch(m_scan->Voxelfilter(m_scan->GetScanPoints(), 0.4), m_estimate_pose, 1, 10); 
-		std::cout<<"m_estimate_pose2: "<<m_estimate_pose.transpose()<<std::endl;
 		m_estimate_pose = m_scan_matcher->ScanMatch(m_scan->Voxelfilter(m_scan->GetScanPoints(), 0.1), m_estimate_pose, 0, 5);
-		std::cout<<"m_estimate_pose3: "<<m_estimate_pose.transpose()<<std::endl;
-
 		m_status = Status::LOCATION;
 	}	
+}
+
+void PoseGraphOptimize()
+{
+	
 }
 
 void Slam::Location()

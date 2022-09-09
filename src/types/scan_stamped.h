@@ -29,7 +29,7 @@ struct ScanStamped
 	{
 		std::vector<Eigen::Vector2f> points;
 		for(uint i = 0; i < m_params.size; i++)
-			if((ranges[i] > m_params.range_min) && (ranges[i] < m_params.range_max))
+			if((ranges[i] > m_params.range_min) & (ranges[i] < m_params.range_max))
 				{points.push_back(Eigen::Vector2f(ranges[i] * cos(GetAngle(i)), ranges[i] * sin(GetAngle(i))));}
 		
 		return points;
@@ -54,7 +54,6 @@ struct ScanStamped
 
         	points.push_back(sum_point/static_cast<float>(point_pair.second.size()));
         }
-
         return points;
     }
 

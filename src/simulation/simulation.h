@@ -30,7 +30,7 @@ public:
 		std::cout<<"scans.size(): "<<scan_stampeds.size()<<" odoms.size(): "<< timed_odoms.size()<<std::endl;
 
 		bool is_run = true;
-		while(!timed_odoms.empty() && !scan_stampeds.empty())
+		while(!timed_odoms.empty() & !scan_stampeds.empty())
 		{
 			if(KeyBoardHit()) {if(getchar() == ' ') is_run = is_run? false: true;}
 

@@ -350,7 +350,7 @@ class SE3Base {
   // Precondition: ``i`` must be in [0, 5].
   //
   SOPHUS_FUNC static Transformation generator(int i) {
-    SOPHUS_ENSURE(i >= 0 && i <= 5, "i should be in range [0,5].");
+    SOPHUS_ENSURE(i >= 0 & i <= 5, "i should be in range [0,5].");
     Tangent e;
     e.setZero();
     e[i] = Scalar(1);
@@ -364,7 +364,7 @@ class SE3Base {
   SOPHUS_FUNC static void internalGenerator(
       int i, Eigen::Quaternion<Scalar>* internal_gen_q,
       Vector3<Scalar>* internal_gen_t) {
-    SOPHUS_ENSURE(i >= 0 && i <= 5, "i should be in range [0,5]");
+    SOPHUS_ENSURE(i >= 0 & i <= 5, "i should be in range [0,5]");
     SOPHUS_ENSURE(internal_gen_q != NULL,
                   "internal_gen_q must not be the null pointer");
     SOPHUS_ENSURE(internal_gen_t != NULL,

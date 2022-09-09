@@ -75,7 +75,7 @@ void ScanToMap::UpdateEstimatedPose(std::shared_ptr<GridMapUtils> map_utils, Eig
 void ScanToMap::Normalize(Eigen::Vector3f& p)
 {
     while(p(2) > M_PI) p(2) -= 2 * M_PI;
-	while(p(2) < -M_PI) p(2) += 2 * M_PI;
+    while(p(2) < -M_PI) p(2) += 2 * M_PI;
 }
 
 void ScanToMap::GetHessianDerivative(const Eigen::Vector3f &robot_in_world, const std::vector<Eigen::Vector2f> &scan_point, 
@@ -129,8 +129,8 @@ Eigen::Vector3f ScanToMap::BilinearInterpolationWithDerivative(const Eigen::Vect
     float p11 = map_utils->GetCellProb(point_in_map.cast<int>() + Eigen::Vector2i(1, 1));
 
     return Eigen::Vector3f( ( (factor1 * ( factor0 * p11 + factor0_inv * p01)) + (factor1_inv * ( factor0 * p10 + factor0_inv * p00) ) ),
-                                			( factor1 * ( p11 - p01 ) + factor1_inv * ( p10 - p00 ) ),
-                                			( factor0 * ( p11 - p10 ) + factor0_inv * ( p01 - p00 ) ));
+                                            ( factor1 * ( p11 - p01 ) + factor1_inv * ( p10 - p00 ) ),
+                                            ( factor0 * ( p11 - p10 ) + factor0_inv * ( p01 - p00 ) ));
 }
 
 bool ScanToMap::PoseDiffSmallerThan(const Eigen::Vector3f& old_pose, const Eigen::Vector3f& new_pose) 
