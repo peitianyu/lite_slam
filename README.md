@@ -10,6 +10,16 @@
 https://github.com/peitianyu/bag2txt
 ```
 
+# 测试data
+```
+链接：https://pan.baidu.com/s/19gm9azasi70CXTWbQ7dGrw?pwd=jned 
+提取码：jned 
+```
+
+# 文件夹结构
+[![vLMkuQ.png](https://s1.ax1x.com/2022/09/09/vLMkuQ.png)](https://imgse.com/i/vLMkuQ)
+
+
 # 已完成
 ```
 - scan_to_map定位(体素滤波加速)
