@@ -603,7 +603,7 @@ class PooledAllocator {
   /* We maintain memory alignment to word boundaries by requiring that all
       allocations be in multiples of the machine wordsize.  */
   /* Size of machine word in bytes.  Must be power of 2. */
-  /* Minimum number of bytes requested at a time from	the system.  Must be
+  /* Minimum number of bytes requested at a time from the system.  Must be
    * multiple of WORDSIZE. */
 
   size_t remaining; /* Number of bytes left in current block of storage. */
@@ -971,9 +971,9 @@ public:
     IndexType left = 0;
     IndexType right = count - 1;
     for (;;) {
-      while (left <= right & dataset_get(obj, ind[left], cutfeat) < cutval)
+      while (left <= right && dataset_get(obj, ind[left], cutfeat) < cutval)
         ++left;
-      while (right & left <= right &
+      while (right && left <= right &&
              dataset_get(obj, ind[right], cutfeat) >= cutval)
         --right;
       if (left > right || !right)
@@ -988,9 +988,9 @@ public:
     lim1 = left;
     right = count - 1;
     for (;;) {
-      while (left <= right & dataset_get(obj, ind[left], cutfeat) <= cutval)
+      while (left <= right && dataset_get(obj, ind[left], cutfeat) <= cutval)
         ++left;
-      while (right & left <= right &
+      while (right && left <= right &&
              dataset_get(obj, ind[right], cutfeat) > cutval)
         --right;
       if (left > right || !right)
@@ -1937,10 +1937,10 @@ public:
  *
  *  Example of usage:
  * \code
- * 	Eigen::Matrix<num_t,Dynamic,Dynamic>  mat;
- * 	// Fill out "mat"...
+ *  Eigen::Matrix<num_t,Dynamic,Dynamic>  mat;
+ *  // Fill out "mat"...
  *
- * 	typedef KDTreeEigenMatrixAdaptor< Eigen::Matrix<num_t,Dynamic,Dynamic> >
+ *  typedef KDTreeEigenMatrixAdaptor< Eigen::Matrix<num_t,Dynamic,Dynamic> >
  * my_kd_tree_t; const int max_leaf = 10; my_kd_tree_t   mat_index(mat, max_leaf
  * ); mat_index.index->buildIndex(); mat_index.index->... \endcode
  *
@@ -1952,7 +1952,7 @@ public:
  * the columns of the matrix are used as the points.
  */
 template <class MatrixType, int DIM = -1, class Distance = nanoflann::metric_L2,
-	  bool row_major = true>
+    bool row_major = true>
 struct KDTreeEigenMatrixAdaptor {
   typedef KDTreeEigenMatrixAdaptor<MatrixType, DIM, Distance, row_major> self_t;
   typedef typename MatrixType::Scalar num_t;
