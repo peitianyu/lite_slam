@@ -26,6 +26,8 @@ include_directories(src/simulation
                     src/types
                     src/third_parties
                     src/scan_match/scan_to_map
+                    src/scan_match/ndt
+                    src/scan_match/icp
                     src/grid_map
                     src/slam
                     src/test
@@ -39,6 +41,8 @@ aux_source_directory(src/simulation SIMULATION)
 aux_source_directory(src/types TYPES)
 aux_source_directory(src/third_parties THIRD_PARTIES)
 aux_source_directory(src/scan_match/scan_to_map SCAN_TO_MAP)
+aux_source_directory(src/scan_match/icp ICP)
+aux_source_directory(src/scan_match/ndt NDT)
 aux_source_directory(src/grid_map GRID_MAP)
 aux_source_directory(src/slam SLAM)
 aux_source_directory(src/test TEST)
@@ -47,5 +51,5 @@ aux_source_directory(src/loop_closure LOOP_CLOSURE)
 
 # 执行文件
 add_executable(${PROJECT_NAME} ${SRC} ${SIMULATION} ${TYPES} ${THIRD_PARTIES} ${SCAN_TO_MAP} ${GRID_MAP} 
-                ${SLAM} ${LOOP_CLOSURE} ${TEST} ${GRAPH_OPTIMIZE})
+                ${SLAM} ${LOOP_CLOSURE} ${TEST} ${GRAPH_OPTIMIZE} ${ICP} ${NDT})
 target_link_libraries(${PROJECT_NAME} ${EIGEN3_LIBRARY} ${OpenCV_LIBS})
