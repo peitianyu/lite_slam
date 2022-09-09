@@ -29,7 +29,9 @@ include_directories(src/simulation
                     src/grid_map
                     src/slam
                     src/test
-                    src/loop_closure)
+                    src/loop_closure
+                    src/graph_optimize
+                    src/ini_parse)
 
 # 添加.cpp文件
 aux_source_directory(src  SRC)
@@ -40,8 +42,10 @@ aux_source_directory(src/scan_match/scan_to_map SCAN_TO_MAP)
 aux_source_directory(src/grid_map GRID_MAP)
 aux_source_directory(src/slam SLAM)
 aux_source_directory(src/test TEST)
+aux_source_directory(src/graph_optimize GRAPH_OPTIMIZE)
 aux_source_directory(src/loop_closure LOOP_CLOSURE)
 
 # 执行文件
-add_executable(${PROJECT_NAME} ${SRC} ${SIMULATION} ${TYPES} ${THIRD_PARTIES} ${SCAN_TO_MAP} ${GRID_MAP} ${SLAM} ${LOOP_CLOSURE} ${TEST})
+add_executable(${PROJECT_NAME} ${SRC} ${SIMULATION} ${TYPES} ${THIRD_PARTIES} ${SCAN_TO_MAP} ${GRID_MAP} 
+                ${SLAM} ${LOOP_CLOSURE} ${TEST} ${GRAPH_OPTIMIZE})
 target_link_libraries(${PROJECT_NAME} ${EIGEN3_LIBRARY} ${OpenCV_LIBS})
