@@ -28,11 +28,11 @@ public:
     bool Match( const std::vector<Eigen::Vector2f> &first_scan, const std::vector<Eigen::Vector2f> &second_scan, Eigen::Vector3f &robot_pose);  
     
 private:
-    void CalculateNdtGrid( const std::vector<Eigen::Vector2f> &scan );
+    void CalculateNdtGrid(const std::vector<Eigen::Vector2f> &scan, std::vector<GridCell>& grids);
 
-    void GetHessianDerived( const std::vector<Eigen::Vector2f> &scan, const Eigen::Vector3f &p, Eigen::Matrix3f &H, Eigen::Vector3f &b );  
+    void GetHessianDerived(const std::vector<Eigen::Vector2f>& scan, const Eigen::Vector3f& p, const std::vector<GridCell>& grids, Eigen::Matrix3f& H, Eigen::Vector3f& b);
 
-    void EstimateTransformationOnce( const std::vector<Eigen::Vector2f> &scan, Eigen::Vector3f &p );
+    void EstimateTransformationOnce(const std::vector<Eigen::Vector2f> &scan, const std::vector<GridCell> &grids, Eigen::Vector3f &p);
 
 private:    
     const int PointToGrid( const Eigen::Vector2f &point ) const;
@@ -42,7 +42,6 @@ private:
     void NormalizePose(Eigen::Vector3f &pose);
 
 private:
-    std::vector<GridCell> m_grids;
     Options m_options;
 };
 
