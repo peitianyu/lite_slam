@@ -56,6 +56,8 @@ public:
 
         void push_back(const KeyFrame &key_frame) {key_frames.push_back(key_frame);} // TODO: 加入个数限制
 
+        KeyFrame& back() {return key_frames.back();}
+
         size_t size() const {return key_frames.size();}
 
         std::vector<KeyFrame> key_frames;
@@ -84,7 +86,7 @@ public:
 
     const int DetectLoopClosure(const std::vector<Eigen::Vector2f> &scan, Eigen::Vector3f &loop_pose);
 
-    void AddKeyFrame(const size_t &id, const Eigen::Vector3f& curr_pose, const std::vector<Eigen::Vector2f> &scan);
+    const KeyFrame& AddKeyFrame(const size_t &id, const Eigen::Vector3f& curr_pose, const std::vector<Eigen::Vector2f> &scan);
 
     void SaveKeyFrame(const std::string &file);
 

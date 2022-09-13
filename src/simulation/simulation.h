@@ -12,18 +12,21 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include"timed_pose.h"
-#include"slam.h"
+#include"mapper.h"
+#include"location.h"
 
 class Simulation
 {
 public:
-	Simulation()
-	{
-		m_slam = std::make_unique<Slam>(Slam::Options());
-	}
+	Simulation() = default;
 
 	void Run(const std::string& scanfile, const std::string& odomfile)
 	{
+		// // 测试mapper
+		// m_slam = std::make_unique<Mapper>(Mapper::Options());
+		// 测试location
+		m_slam = std::make_unique<PureLocation>(PureLocation::Options());
+
 		std::vector<ScanStamped> scan_stampeds = ParseScanData(scanfile);
 		std::vector<TimedPose> timed_odoms = ParseOdomData(odomfile);
 
@@ -123,7 +126,7 @@ private:
         return odoms;
     }
 private:
-	std::unique_ptr<Slam> m_slam;
+	std::unique_ptr<SlamBase> m_slam;
 };
 
 #endif // __SIMULATION_H__

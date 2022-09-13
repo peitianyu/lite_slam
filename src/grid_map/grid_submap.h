@@ -5,36 +5,14 @@
 #include <memory>
 #include <vector>
 #include "grid_map_base.h"
-#include "scan_context.h"
+#include "key_frame.h"
 
 struct GridSubMap
 {
+    uint id;
     Eigen::Vector3f pose;
     std::shared_ptr<GridMapBase> grid_map;
-    std::vector<std::shared_ptr<ScanContext::KeyFrame>> key_frames;
-};
-
-
-class GridSubMaps
-{
-public:
-    struct Options
-    {
-        uint max_dist = 20.0;
-    };
-public:
-    GridSubMaps(const Options& options)
-    :m_options(options)
-    {}
-
-    void AddSubMap(const uint& id, std::shared_ptr<GridSubMaps> grid_map)
-    {
-        m_submaps[id] = grid_map;
-    }
-
-private:
-    Options m_options;
-    std::map<uint, std::shared_ptr<GridSubMaps>> m_submaps;
+    std::shared_ptr<KeyFrames> key_frames; // id pose scan scan_context
 };
 
 

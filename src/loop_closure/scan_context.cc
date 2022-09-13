@@ -42,11 +42,12 @@ const int ScanContext::DetectLoopClosure(const std::vector<Eigen::Vector2f> &sca
     return -1;
 }
 
-void ScanContext::AddKeyFrame(const size_t &id, const Eigen::Vector3f& curr_pose, const std::vector<Eigen::Vector2f> &scan)
+const ScanContext::KeyFrame& ScanContext::AddKeyFrame(const size_t &id, const Eigen::Vector3f& curr_pose, const std::vector<Eigen::Vector2f> &scan)
 {
     Eigen::MatrixXf scan_context = MakeScanContext(scan);
     KeyFrame key_frame = KeyFrame{id, curr_pose, scan_context};
     m_key_frames->push_back(key_frame);
+    return m_key_frames->back();
 }
 
 Eigen::MatrixXf ScanContext::MakeScanContext(const std::vector<Eigen::Vector2f> &scan)

@@ -1,51 +1,27 @@
 #include<vector>
 #include<Eigen/Core>
 
-struct KeyFrame
-{
-	uint id;
-	Eigen::Vector3f pose;
-	std::vector<Eigen::Vector2f> scan_points;
-};
-
+template<typename KeyFrame>
 class KeyFrames
 {
 public:
-	KeyFrames(const uint& num)
-	:m_num(num)
-	{
-		if(num <= 0) {m_key_frames.resize(std::numeric_limits<int>::max());}
-		else {m_key_frames.resize(num);}
-	}
-
-	void Reset()
-	{
-		if(m_num <= 0) {m_key_frames.resize(std::numeric_limits<int>::max());}
-		else {m_key_frames.resize(m_num);}
-	}
+	KeyFrames() = default;
 
 	KeyFrames& operator=(const KeyFrames&) = default;
 
 	void Push_back(const KeyFrame& key_frame)
 	{
-		std::vector<KeyFrame>::iterator it = std::lower_bound(m_key_frames.begin(), m_key_frames.end(), key_frame, 
-			[](const KeyFrame& a, const KeyFrame& b){
-			return a.id < b.id;
-		})
-		m_key_frames.insert(it, key_frame);
-
-		while(m_key_frames.size() > m_num)
-			m_key_frames.pop_front();
-	}
-
-	KeyFrame Pop_front() const
-	{
-		return m_key_frames.pop_front();
+		m_key_frames.push_back(key_frame);
 	}
 
 	KeyFrame Front() const
 	{
 		return m_key_frames.front();
+	}
+
+	KeyFrame Back() const
+	{
+		return m_key_frames.back();
 	}
 
 	uint Size() const
@@ -59,6 +35,5 @@ public:
 	}
 
 private:
-	int m_num;
 	std::vector<KeyFrame> m_key_frames;
 };
